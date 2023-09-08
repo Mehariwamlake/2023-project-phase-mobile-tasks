@@ -63,6 +63,24 @@ class TaskManager {
       return;
     }
   }
+
+  void editTask(int index, Task updatedTask) {
+    if (index >= 0 && index < tasks.length) {
+      tasks[index] = updatedTask;
+      print('updated succesfully');
+    } else {
+      print('can not update');
+    }
+  }
+
+  void deleteTask(int index) {
+    if (index >= 0 && index < tasks.length) {
+      tasks.removeAt(index);
+      print('task is removed');
+    } else {
+      print('can not removed');
+    }
+  }
 }
 
 void main() {
@@ -74,4 +92,9 @@ void main() {
 
   print('all task list');
   taskManager.viewAll();
+  taskManager.editTask(
+      0,
+      Task('Updated Task 1', 'Updated description for Task 1', DateTime.now(),
+          Status.panding));
+  taskManager.deleteTask(1);
 }
