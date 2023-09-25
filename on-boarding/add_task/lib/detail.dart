@@ -10,6 +10,7 @@ class TaskDetailPage extends StatefulWidget {
 class _TaskDetailPageState extends State<TaskDetailPage> {
   @override
   Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -33,60 +34,81 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
         ],
       ),
       body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset('image/shopping-list.png'),
-            const Text(
-              'Title',
-              style: TextStyle(
-                fontSize: 15,
+        margin: const EdgeInsets.only(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset('image/shopping-list.png'),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                    ),
+                    child: const Text(
+                      'Title',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: screen.width - 20,
+                    margin: EdgeInsets.all(screen.width / 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 20),
+                    alignment: Alignment.topLeft,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color.fromRGBO(241, 238, 238, 1),
+                    ),
+                    child: const Text('UI/UX App Design'),
+                  ),
+                ],
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              alignment: Alignment.topLeft,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(241, 238, 238, 1),
+              const Text(
+                'Description',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
               ),
-              child: const Text('UI/UX App Design'),
-            ),
-            const Text(
-              'Description',
-              style: TextStyle(
-                fontSize: 15,
+              Container(
+                width: screen.width - 30,
+                margin: EdgeInsets.all(screen.width / 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                alignment: Alignment.topLeft,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color.fromRGBO(241, 238, 238, 1),
+                ),
+                child: const Text(
+                    'First I have to animate the logo and prototyping my design. It’svery important.'),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              alignment: Alignment.topLeft,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(241, 238, 238, 1),
+              const Text(
+                'Deadline',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
               ),
-              child: const Text(
-                  'First I have to animate the logo and prototyping my design. It’svery important.'),
-            ),
-            const Text(
-              'Deadline',
-              style: TextStyle(
-                fontSize: 15,
+              Container(
+                width: screen.width - 30,
+                margin: EdgeInsets.all(screen.width / 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                alignment: Alignment.topLeft,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color.fromRGBO(241, 238, 238, 1),
+                ),
+                child: const Text('UI/UX App Design'),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              alignment: Alignment.topLeft,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(241, 238, 238, 1),
-              ),
-              child: const Text('UI/UX App Design'),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
