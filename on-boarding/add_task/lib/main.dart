@@ -13,7 +13,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false, home: TodoList());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/home': (context) => TodoList(),
+        },
+        home: HomePage());
   }
 }
