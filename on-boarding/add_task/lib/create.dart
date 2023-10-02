@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:add_task/utlity.dart';
 
 class CreateTask extends StatefulWidget {
   const CreateTask({super.key});
@@ -8,6 +10,31 @@ class CreateTask extends StatefulWidget {
 }
 
 class _CreateTaskState extends State<CreateTask> {
+  TextEditingController _dateController = TextEditingController();
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _discController = TextEditingController();
+
+
+  DateTime? selectedDate;
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(20000),
+    );
+
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+        final lastDate = DateFormat.yMMMd().format(picked);
+        _dateController.text = lastDate;
+      });
+    }
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
@@ -22,6 +49,9 @@ class _CreateTaskState extends State<CreateTask> {
         ]);
     TextStyle style = const TextStyle(
         fontWeight: FontWeight.bold, color: Color.fromRGBO(238, 111, 87, 1));
+
+    
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -62,11 +92,15 @@ class _CreateTaskState extends State<CreateTask> {
               content(screen, cardDecoration, "UI/UX App Design"),
               Container(
                 margin: const EdgeInsets.only(left: 20),
-                child: Text(
-                  'Due Date',
-                  style: style,
-                ),
-              ),
+               child: Expanded(
+                    child: TextField(
+                  controller: _titleController,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Task name',
+                  ),
+                  ),
+              ),),
               Container(
                 width: screen.width - 20,
                 margin: const EdgeInsets.only(
@@ -75,15 +109,28 @@ class _CreateTaskState extends State<CreateTask> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: cardDecoration,
                 child: Row(
-                  children: const [
-                    Text("April 29, 2023 12:30 AM",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 12)),
-                    Icon(
-                      Icons.calendar_month,
+                   children: [
+                
+                    Expanded(
+                        child: TextField(
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Date',
+                      ),
+                      controller: _dateController,
+                      onChanged: (value) => {},
+                    )),
+
+                    GestureDetector(
+                      onTap: () {
+                        _selectDate(context);
+                      },
+                      child: const Icon(
+                         Icons.calendar_month,
                       size: 20,
-                      color: Color.fromRGBO(238, 111, 87, 1),
-                    )
+                      color: Color.fromARGB(255, 0, 140, 255),
+                    ),
+                    ),
                   ],
                 ),
               ),
@@ -94,8 +141,24 @@ class _CreateTaskState extends State<CreateTask> {
                   style: style,
                 ),
               ),
-              content(screen, cardDecoration,
-                  "First I have to animate the logo and later prototyping my design. It's very important"),
+             Container(
+                decoration: cardDecoration,
+                width: screen.width - 20,
+                margin: const EdgeInsets.only(
+                    bottom: 20, left: 10, right: 10, top: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: Expanded(
+                    child: TextField(
+                      maxLines: 4,
+                      
+                  controller: _discController,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Description',
+                  ),
+                )),
+              ),
               SizedBox(
                 height: screen.height * 0.1,
               ),
@@ -103,7 +166,7 @@ class _CreateTaskState extends State<CreateTask> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                      //Rounded shaped button
+                      
                       style: ButtonStyle(
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -114,7 +177,20 @@ class _CreateTaskState extends State<CreateTask> {
                           elevation: MaterialStateProperty.all(5),
                           backgroundColor: MaterialStateProperty.all(
                               const Color.fromRGBO(238, 111, 87, 1))),
-                      onPressed: () {},
+                      onPressed: () {
+                       
+                          setState(() {
+                            Task t = Task(
+                                _dateController.text,
+                                _titleController.text,
+                                 getRandomColor(),
+                                description:  _discController.text);
+                            tasks.add(t);
+                          });
+                         
+                          Navigator.pushNamed(context, '/home');
+                        },
+                      
                       child: Container(
                         margin: const EdgeInsets.only(
                           left: 30,
