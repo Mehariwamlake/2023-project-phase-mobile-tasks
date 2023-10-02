@@ -1,3 +1,4 @@
+import 'package:add_task/utlity.dart';
 import 'package:flutter/material.dart';
 
 class TaskDetailPage extends StatefulWidget {
@@ -11,6 +12,9 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
+    final Task? task = ModalRoute.of(context)?.settings.arguments as Task?;
+
+    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -23,7 +27,9 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           color: Colors.orange,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         actions: [
           IconButton(
@@ -44,17 +50,16 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
                       horizontal: 20,
                     ),
-                    child: const Text(
-                      'Title',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
+                    child:  Text(
+              "Title",
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
                   ),
                   Container(
                     width: screen.width - 20,
@@ -66,8 +71,8 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
                       borderRadius: BorderRadius.circular(10),
                       color: const Color.fromRGBO(241, 238, 238, 1),
                     ),
-                    child: const Text('UI/UX App Design'),
-                  ),
+                   child:  Text(task!=null? task.description:"Title"
+                 ),),
                 ],
               ),
               const Text(
@@ -86,9 +91,8 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
                   borderRadius: BorderRadius.circular(10),
                   color: const Color.fromRGBO(241, 238, 238, 1),
                 ),
-                child: const Text(
-                    'First I have to animate the logo and prototyping my design. It’svery important.'),
-              ),
+               child:  Text(task!=null?task.date:"descrip"),
+            ),
               const Text(
                 'Deadline',
                 style: TextStyle(
@@ -105,8 +109,8 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
                   borderRadius: BorderRadius.circular(10),
                   color: const Color.fromRGBO(241, 238, 238, 1),
                 ),
-                child: const Text('UI/UX App Design'),
-              ),
+               child:  Text(task!=null?task.date:"date"),
+            ),
             ],
           ),
         ),
