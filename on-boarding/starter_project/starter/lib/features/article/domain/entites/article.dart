@@ -2,12 +2,20 @@ import 'package:equatable/equatable.dart';
 
 class Article extends Equatable {
   final String id;
-  final String text;
+  final String title;
+  final String imageUrl;
+
+
+
+
   Article({
-    required this.text,
-    required  this.id});
+    required this.title,
+    required  this.id,
+    required this.imageUrl,
+
+    }) : super();
 
   @override
 
-  List<Object?> get props => [text];
+  List<Object?> get props => [id, title];
 }

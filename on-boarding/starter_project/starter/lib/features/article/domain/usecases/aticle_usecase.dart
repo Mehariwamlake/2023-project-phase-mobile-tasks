@@ -19,3 +19,20 @@ class GetArticle {
     return await repository.getArticle();
   }
 }
+
+
+class GetArticleById {
+  final ArticleRepository repository;
+  GetArticleById({required this.repository});
+  Future<Either<Failure, Article>> call (String userId) async{
+    return await repository.getArticleById(userId);
+  }
+}
+
+class PostArticle {
+  final ArticleRepository repository;
+  PostArticle({required this.repository});
+  Future<Either<Failure, Article>> call (Article article) async{
+    return await repository.postArticle(article);
+  }
+}
