@@ -15,7 +15,7 @@ class DeletArticle {
 class GetArticle {
   final ArticleRepository repository;
   GetArticle({required this.repository});
-  Future<Either<Failure, Article>> call (String id) async{
+  Future<Either<Failure, List<Article>>> call (String id) async{
     return await repository.getArticle();
   }
 }
@@ -34,5 +34,13 @@ class PostArticle {
   PostArticle({required this.repository});
   Future<Either<Failure, Article>> call (Article article) async{
     return await repository.postArticle(article);
+  }
+}
+
+class GetArticleByUserId {
+  final ArticleRepository repository;
+  GetArticleByUserId({required this.repository});
+  Future<Either<Failure, List<Article>>> call (String userId) async{
+    return await repository.getArticleByUserId(userId);
   }
 }
