@@ -44,3 +44,11 @@ class GetArticleByUserId {
     return await repository.getArticleByUserId(userId);
   }
 }
+
+class EditArticle {
+  final ArticleRepository repository;
+  EditArticle({required this.repository});
+  Future<Either<Failure, Article>> call (String id, Article article) async{
+    return await repository.editArticle(id, article);
+  }
+}
