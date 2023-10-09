@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 import 'package:starter/core/error/fail.dart';
 import 'package:starter/features/article/domain/entites/article.dart';
 import '../repository/article_repository.dart';
@@ -40,7 +39,7 @@ class PostArticle {
 class GetArticleByUserId {
   final ArticleRepository repository;
   GetArticleByUserId({required this.repository});
-  Future<Either<Failure, List<Article>>> call (String userId) async{
+  Future<Either<Failure, Article>> call (String userId) async{
     return await repository.getArticleByUserId(userId);
   }
 }

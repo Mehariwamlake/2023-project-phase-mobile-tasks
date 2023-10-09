@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:starter/core/error/fail.dart';
 import 'package:starter/features/article/domain/entites/article.dart';
 import 'package:starter/features/article/domain/usecases/aticle_usecase.dart';
@@ -24,6 +23,8 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
       (success) => ArticleSuccessState(article: success));
   }
 
+  
+
   void _getArticleById(
     GetArticleByIdEvent event, Emitter<ArticleState> emit) async {
       emit(ArticleLoadingState());
@@ -31,6 +32,32 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
       emit(articleSucessOrFail(result));
     }
 
+  void _getArticleByUserId(
+      GetArticleByUserIdEvent event, Emitter<ArticleState> emit) async {
+    emit(ArticleLoadingState());
+    final result = await getArticleByUserId(event.userId);
+    emit(articleSucessOrFail(result));
+  }
+
+  void _postArticle(
+    PostArticleEvent event, Emitter<ArticleState> emit) async{
+      emit(ArticleLoadingState());
+      final result = await postArticle(event.article);
+      emit(articleSucessOrFail(result));
+    }
+
+  void _editArticle(EditArticleEvent event, Emitter<ArticleState> emit) async {
+    emit(ArticleLoadingState());
+    final result = await editArticle(event.articleId, event.article);
+    emit(articleSucessOrFail(result));
+  }
+
+  void _deletArticle(DeletArticleEvent event, Emitter<ArticleState> emit) async {
+    emit(ArticleLoadingState());
+    final result = await deletArticle(event.articleId);
+    emit(articleSucessOrFail(result));
+
+  }
 
   ArticleBloc({
     required this.deletArticle,
@@ -40,8 +67,10 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
     required this.getArticleByUserId,
     required this.postArticle,
   }) : super(ArticleInitial()) {
-    on<ArticleEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+    on<GetArticleByIdEvent>(_getArticleById);
+    on<GetArticleByUserIdEvent>(_getArticleByUserId);
+    on<PostArticleEvent>(_postArticle);
+    on<EditArticleEvent>(_editArticle);
+    on<DeletArticleEvent>(_deletArticle);
   }
 }
