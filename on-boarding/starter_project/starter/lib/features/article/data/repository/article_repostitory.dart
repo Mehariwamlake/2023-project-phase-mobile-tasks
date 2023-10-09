@@ -62,7 +62,7 @@ abstract class ArticleRepositoryImpl implements ArticleRepository {
   }
 
   @override
-  Future<Either<Failure, List<Article>>> getArticleByUserId(
+  Future<Either<Failure, Article>> getArticleByUserId(
       String userId) async {
     try {
       final articlesByUser = await remoteDataSource.getArticleByUserId(userId);

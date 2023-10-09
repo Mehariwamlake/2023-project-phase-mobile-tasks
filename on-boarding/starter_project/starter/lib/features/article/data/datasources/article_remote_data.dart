@@ -10,7 +10,7 @@ abstract class ArticleRemoteData{
   Future<ArticleModel> getArticleById(String id);
   Future<ArticleModel> editArticle(String id, Article article);
   Future<ArticleModel> postArticle(Article article);
-  Future<List<ArticleModel>> getArticleByUserId(String userId);
+  Future<ArticleModel> getArticleByUserId(String userId);
   
 }
 
@@ -71,7 +71,7 @@ class ArticleRemoteDataSourceImpl implements ArticleRemoteData {
   }
 
   @override
-  Future<List<ArticleModel>> getArticleByUserId(String userId) async {
+  Future<ArticleModel> getArticleByUserId(String userId) async {
     final response = await client.get(
       Uri.parse('$uriString$userId'),
       headers: {
