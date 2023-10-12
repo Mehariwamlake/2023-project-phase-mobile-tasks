@@ -1,8 +1,7 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:starter/features/article/presentation/widget/Article_post.dart';
 import 'package:starter/features/article/presentation/widget/Header_icon.dart';
+import 'package:starter/features/article/presentation/widget/header.dart';
 
 class ArticlePage extends StatefulWidget {
   const ArticlePage({super.key});
@@ -20,7 +19,7 @@ class _ArticlePageState extends State<ArticlePage> {
         const HeaderIconButtons(),
         Expanded(
           child: SingleChildScrollView(
-            child: Column(children: [
+            child: Column(children: [Header(), ArticlePost()
             
             ]),
           ))

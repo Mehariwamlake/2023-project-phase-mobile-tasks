@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:starter/features/article/presentation/pages/article_page.dart';
-
-void main() {
+import 'injection/injection_contaner.dart' as di;
+void main() async {
+  await di.init();
   runApp(const MainApp());
 }
 
@@ -11,7 +12,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Articlepage()
+      home: ArticlePage()
       );
     
   }
